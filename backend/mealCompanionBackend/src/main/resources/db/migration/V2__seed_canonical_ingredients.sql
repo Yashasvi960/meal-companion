@@ -1,0 +1,21 @@
+INSERT INTO canonical_ingredients(name, display_name, base_unit, category, nutrients, spice_tags)
+VALUES
+    ('sesame_seed','Sesame seeds','g','Seeds','{"iron_mg_per_100g":14.6, "vitaminC_mg_per_100g":0}','{sesame}'),
+    ('curry_leaf','Curry leaves','g','Spices','{"iron_mg_per_100g":3.0}','{curry_leaf}'),
+    ('coconut_oil','Coconut oil','ml','Oil','{}','{coconut}'),
+    ('spinach','Spinach','g','Produce','{"iron_mg_per_100g":2.7,"vitaminC_mg_per_100g":28}','{leafy}'),
+    ('lentils','Lentils (dry)','g','Dry','{"iron_mg_per_100g":7.5,"vitaminC_mg_per_100g":1.5}','{legume}'),
+    ('chickpeas','Chickpeas (dry)','g','Dry','{"iron_mg_per_100g":6.2}','{legume}'),
+    ('tofu','Tofu','g','Protein','{"iron_mg_per_100g":5.4}','{}'),
+    ('brown_rice','Brown rice','g','Grains','{"iron_mg_per_100g":0.6}','{}'),
+    ('tomato','Tomato','g','Produce','{"iron_mg_per_100g":0.5,"vitaminC_mg_per_100g":14}','{}'),
+    ('onion','Onion','g','Produce','{}','{}'),
+    ('garlic','Garlic','g','Produce','{}','{}'),
+    ('mustard_seed','Mustard seeds','g','Spices','{}','{mustard}'),
+    ('turmeric','Turmeric powder','g','Spices','{}','{turmeric}'),
+    ('cumin','Cumin seeds','g','Spices','{}','{cumin}'),
+    ('chili_powder','Chili powder','g','Spices','{}','{chili}'),
+    ('yogurt','Yogurt','g','Dairy','{"iron_mg_per_100g":0.1}','{}'),
+    ('paneer','Paneer','g','Dairy','{"iron_mg_per_100g":0.8}','{}'),
+    ('almond','Almonds','g','Nuts','{"iron_mg_per_100g":3.7}','{}'),
+    ('pumpkin_seed','Pumpkin seeds','g','Seeds','{"iron_mg_per_100g":8.8}','{seed}');
