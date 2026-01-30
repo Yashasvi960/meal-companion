@@ -19,8 +19,9 @@ public class RecipeIngredientEntity {
     @GeneratedValue
     private UUID id;
 
-    @Column(name = "recipe_id", nullable = false)
-    private UUID recipeId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "recipe_id", nullable = false)
+    private RecipesEntity recipe;
 
     @Column(name = "raw_text", nullable = false)
     private String rawText;

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -32,6 +33,9 @@ public class RecipesEntity {
 
     @Column(name = "nutrients_summary")
     private String nutrients_summary;
+
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<RecipeIngredientEntity> recipeIngredientList;
 
     @Column(name = "created_at", updatable = false)
     private Instant created_at;
