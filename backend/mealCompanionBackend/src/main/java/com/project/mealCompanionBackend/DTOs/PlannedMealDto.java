@@ -13,6 +13,7 @@ import java.util.UUID;
 public class PlannedMealDto {
 
     private UUID recipeId;
+    private String title;
     private LocalDate localDate;
     private Integer servings;
 

@@ -31,7 +31,6 @@ public class MealPlanService {
         Integer days = request.getDays()!=null?request.getDays():7;
         Integer servings = request.getServings()!=null?request.getServings():1;
 
-        List<PantryEntity> pantryEntityList = pantryRepository.findByClientId(clientId);
 
 
         List<RecipesEntity> recipesList = recipesRepository.findAll();
@@ -56,6 +55,8 @@ public class MealPlanService {
                 candidate.addAll(recipesList);
             }
 
+            Collections.shuffle(candidate, new Random());
+
             List<RecipesEntity> picks = new ArrayList<>();
             int idx = 0;
             for (int i = 0; i < days; i++) {
@@ -77,6 +78,7 @@ public class MealPlanService {
                 RecipesEntity chosen = picks.get(dayIndex);
                 MealPlanItemsEntity item = MealPlanItemsEntity.builder()
                         .mealPlanId(mealPlan.getId())
+                        .title(chosen.getTitle())
                         .dayIndex(dayIndex)
                         .recipeId(chosen.getId())
                         .servings(servings)
@@ -85,6 +87,7 @@ public class MealPlanService {
 
                 plannedMeals.add(PlannedMealDto.builder()
                         .recipeId(chosen.getId())
+                        .title(chosen.getTitle())
                         .localDate(startDate.plusDays(dayIndex))
                         .servings(servings)
                         .build());
@@ -113,6 +116,7 @@ public class MealPlanService {
         List<PlannedMealDto> planned = items.stream().map(i ->
                 PlannedMealDto.builder()
                         .recipeId(i.getRecipeId())
+                        .title(i.getTitle())
                         .localDate(mp.getStartDate().plusDays(i.getDayIndex()))
                         .servings(i.getServings())
                         .build()

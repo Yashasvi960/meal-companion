@@ -23,6 +23,9 @@ public class MealPlanEntity {
     @Column(name = "client_id", nullable = false)
     private String clientId;
 
+    @Column(name = "title", nullable = false)
+    private String title;
+
     @Column(name = "start_date", nullable = false)
     private LocalDate startDate;
 

@@ -21,6 +21,9 @@ public class MealPlanItemsEntity {
     @Column(name = "meal_plan_id", nullable = false)
     private UUID mealPlanId;
 
+    @Column(name = "title")
+    private String title;
+
     @Column(name = "day_index", nullable = false)
     private Integer dayIndex;
 

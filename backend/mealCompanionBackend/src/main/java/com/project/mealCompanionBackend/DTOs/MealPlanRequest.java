@@ -13,6 +13,7 @@ import java.util.List;
 public class MealPlanRequest {
 
     private String clientId;
+    private String title;
     private LocalDate startDate;
     private Integer days;
     private Integer servings;

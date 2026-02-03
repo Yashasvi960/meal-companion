@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS meal_plans (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     client_id TEXT NOT NULL,
+    title TEXT NOT NULL,
     start_date DATE NOT NULL,
     days INT NOT NULL,
     servings INT NOT NULL,
@@ -10,6 +11,7 @@ CREATE TABLE IF NOT EXISTS meal_plans (
 CREATE TABLE IF NOT EXISTS meal_plan_items (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     meal_plan_id UUID REFERENCES meal_plans(id) ON DELETE CASCADE,
+    title TEXT NOT NULL,
     day_index INT NOT NULL,
     recipe_id UUID NOT NULL,
     servings INT NOT NULL,
