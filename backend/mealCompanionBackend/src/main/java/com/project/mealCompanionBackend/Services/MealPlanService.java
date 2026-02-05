@@ -6,10 +6,11 @@ import com.project.mealCompanionBackend.DTOs.PlannedMealDto;
 import com.project.mealCompanionBackend.Entities.*;
 import com.project.mealCompanionBackend.Repository.MealPlanItemsRepository;
 import com.project.mealCompanionBackend.Repository.MealPlanRepository;
-import com.project.mealCompanionBackend.Repository.PantryRepository;
 import com.project.mealCompanionBackend.Repository.RecipesRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -19,13 +20,14 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class MealPlanService {
+    private static final Logger logger = LoggerFactory.getLogger(MealPlanService.class);
 
     private final RecipesRepository recipesRepository;
-    private final PantryRepository pantryRepository;
     private final MealPlanRepository mealPlanRepository;
     private final MealPlanItemsRepository mealPlanItemsRepository;
 
     public MealPlanResponse generate(MealPlanRequest request) {
+        logger.info("Generating meal plan for client: {}", request.getClientId());
         String clientId = request.getClientId();
         LocalDate startDate = request.getStartDate()!=null?request.getStartDate():LocalDate.now();
         Integer days = request.getDays()!=null?request.getDays():7;
@@ -55,6 +57,7 @@ public class MealPlanService {
                 candidate.addAll(recipesList);
             }
 
+
             Collections.shuffle(candidate, new Random());
 
             List<RecipesEntity> picks = new ArrayList<>();
@@ -68,10 +71,12 @@ public class MealPlanService {
             MealPlanEntity mealPlan  = MealPlanEntity.builder()
                     .clientId(clientId)
                     .startDate(startDate)
+                    .title("Meal Plan for " + clientId)
                     .days(days)
                     .servings(servings)
                     .build();
             mealPlanRepository.save(mealPlan);
+
 
             List<PlannedMealDto> plannedMeals = new ArrayList<>();
             for(int dayIndex = 0; dayIndex< picks.size(); dayIndex++) {
@@ -109,7 +114,9 @@ public class MealPlanService {
 
     @Transactional()
     public MealPlanResponse fetchMealPlan(UUID mealPlanId) {
+        logger.info("Fetching meal plan: {}", mealPlanId);
         Optional<MealPlanEntity> mealPlan = mealPlanRepository.findById(mealPlanId);
+
         if(mealPlan.isEmpty()) return null;
         MealPlanEntity mp = mealPlan.get();
         List<MealPlanItemsEntity> items = mealPlanItemsRepository.findByMealPlanIdOrderByDayIndex(mp.getId());
