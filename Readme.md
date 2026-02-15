@@ -1,2 +1,2 @@
 # meal companion
-Adding readme.md
+Adding changes to the project
